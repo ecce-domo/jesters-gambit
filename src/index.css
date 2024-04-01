@@ -1,5 +1,5 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
@@ -11,10 +11,6 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  --blue: #00a9e0;
-  --red: #ea2028;
-  --purple: #646cff;
 }
 
 a {
@@ -51,16 +47,17 @@ button {
   transition: border-color 0.25s;
 }
 button.selected {
-  /* updated this for light theme */
-  border-color: var(--blue);
-  color: var(--blue);
+  /* border-color: #646cff; */
+  /* color: #646cff; */
+  /* update this for light theme */
+  border-color: #00a9e0;
+  color: #00a9e0;
 }
 button:hover {
-  /* updated this for light theme */
-  border-color: var(--purple);
-  color: var(--purple);
-  /* border-color: var(--red); */
-  /* color: var(--red); */
+  border-color: #646cff;
+  color: #646cff;
+  /* update this for light theme */
+  /* border-color: #43ceff; */
 }
 button:focus,
 button:focus-visible {

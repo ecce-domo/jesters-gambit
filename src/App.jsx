@@ -1,5 +1,8 @@
 import { useState } from 'react';
+import { Link } from 'wouter';
 import './App.css';
+import { useDispatch, useSelector } from 'react-redux';
+import { setPlayerNames } from './redux/playerSlice';
 
 const NumberButton = ({ number, get, set }) => (
   <button
@@ -23,6 +26,9 @@ function App() {
   const names = [name0, name1, name2, name3, name4, name5];
   const setNames = [setName0, setName1, setName2, setName3, setName4, setName5];
 
+  const playersRedux = useSelector(state => state.players);
+  const dispatch = useDispatch();
+
   return (
     <>
       <h1><span className="wizard-blue">Wizard</span> <span className="wizard-red">Scorecard</span></h1>
@@ -38,10 +44,18 @@ function App() {
       {players ? <>
         <div className="card">
           {
-            Array.from({length :players}, (_, i) => <NameInput get={names[i]} set={setNames[i]} key={i} />)
+            Array.from({length: players}, (_, i) => <NameInput get={names[i]} set={setNames[i]} key={i} />)
           }
         </div>
-        <button>Start</button>
+        {/* <Link href="./game"> */}
+          <button
+            onClick={() => {dispatch(setPlayerNames(names))}}
+            // onClick={e => console.log({ game: {
+            //   round: 0,
+            //   players: Array.from({ length: players }, (_, i) => ({ name: names[i], scores: Array.from({ length: 60/players }, () => ({ committed: 0, actual: 0 })) })),
+            // }})}
+          >Start</button>
+        {/* </Link> */}
       </> : <></>}
     </>
   )

@@ -38,7 +38,7 @@ function App() {
       {players ? <>
         <div className="card">
           {
-            Array.from({length :players}, (_, i) => <NameInput get={names[i]} set={setNames[i]} key={i} />)
+            Array.from({length: players}, (_, i) => <NameInput get={names[i]} set={setNames[i]} key={i} />)
           }
         </div>
         <button>Start</button>

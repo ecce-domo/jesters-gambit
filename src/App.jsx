@@ -2,16 +2,12 @@ import { useState } from 'react';
 import { Link, useLocation } from 'wouter';
 import './App.css';
 import { connect } from 'react-redux';
+import { setPlayerNames } from './actions/players';
+import { setPlayerQty } from './actions/numberOfPlayers';
 
 const App = connect(({ players, numberOfPlayers }) => ({ players, playerQty: numberOfPlayers }), ({
-  setPlayerNames: names => ({
-    type: 'SET_PLAYER_NAMES',
-    names,
-  }),
-  setPlayerQty: data => ({
-    type: 'SET_NUMBER_OF_PLAYERS',
-    data
-  })
+  setPlayerNames,
+  setPlayerQty,
 }))(({players, playerQty, setPlayerNames, setPlayerQty}) => {
     const [name0, setName0] = useState('Player 0');
     const [name1, setName1] = useState('Player 1');
@@ -54,7 +50,6 @@ const App = connect(({ players, numberOfPlayers }) => ({ players, playerQty: num
         </div>
         <button
           onClick={(e) => {
-            console.log(names.slice(0, playerQty));
             setPlayerNames(names.slice(0, playerQty));
             navigate('/game');
           }}

@@ -1,21 +1,10 @@
 import { useState } from 'react';
-import { Link } from 'wouter';
-import './App.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPlayerNames } from './redux/playerSlice';
+import { useLocation } from 'wouter';
+import './App.css';
 
-const NumberButton = ({ number, get, set }) => (
-  <button
-    onClick={() => set(number)}
-    className={get === number ? 'selected' : ''}
-  >{number}</button>
-);
-
-const NameInput = ({ get, set }) => (
-  <input value={get} onChange={e => set(e.target.value)} />
-);
-
-function App() {
+const App = () => {
   const [players, setPlayers] = useState(0);
   const [name0, setName0] = useState('Player 0');
   const [name1, setName1] = useState('Player 1');
@@ -25,6 +14,7 @@ function App() {
   const [name5, setName5] = useState('Player 5');
   const names = [name0, name1, name2, name3, name4, name5];
   const setNames = [setName0, setName1, setName2, setName3, setName4, setName5];
+  const [location, navigate] = useLocation();
 
   const playersRedux = useSelector(state => state.players);
   const dispatch = useDispatch();
@@ -35,27 +25,35 @@ function App() {
       <div className="card">
         <h2>Select number of players:</h2>
         <div className="button-container">
-          <NumberButton number={3} get={players} set={setPlayers} />
-          <NumberButton number={4} get={players} set={setPlayers} />
-          <NumberButton number={5} get={players} set={setPlayers} />
-          <NumberButton number={6} get={players} set={setPlayers} />
+          {
+            Array.from({length: 4}, (_, i) => (
+            <button
+              onClick={() => setPlayers(3+i)}
+              className={players === (3+i) ? 'selected' : ''}
+              key={i}
+            >{3+i}</button>
+            ))
+          }
         </div>
       </div>
       {players ? <>
         <div className="card">
           {
-            Array.from({length: players}, (_, i) => <NameInput get={names[i]} set={setNames[i]} key={i} />)
+              names.slice(0, players).map((_, i) => (
+                <input
+                  onChange={e => setNames[i](e.target.value)}
+                  value={names[i]}
+                  key={i}
+                />
+              ))
           }
         </div>
-        {/* <Link href="./game"> */}
-          <button
-            onClick={() => {dispatch(setPlayerNames(names))}}
-            // onClick={e => console.log({ game: {
-            //   round: 0,
-            //   players: Array.from({ length: players }, (_, i) => ({ name: names[i], scores: Array.from({ length: 60/players }, () => ({ committed: 0, actual: 0 })) })),
-            // }})}
-          >Start</button>
-        {/* </Link> */}
+        <button
+          onClick={() => {
+            dispatch(setPlayerNames(names.slice(0, players)))
+            navigate('/game');
+          }}
+        >Start</button>
       </> : <></>}
     </>
   )

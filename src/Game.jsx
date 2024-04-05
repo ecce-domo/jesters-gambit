@@ -1,12 +1,5 @@
-import { useState, useReducer } from 'react';
-import { Link } from 'wouter';
+import React from 'react';
 
-function Game() {
-    return (
-        <>
-            <h1>Game</h1>
-        </>
-    )
-};
+const Game = () => (<h1 className='wizard-blue'>Game</h1>);
 
 export default Game;

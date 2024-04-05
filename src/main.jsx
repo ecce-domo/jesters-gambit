@@ -11,8 +11,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <Switch>
-        <Route path="/" component={App} />
-        <Route path="/game" component={Game} />
+        <Route path='/' component={App} />
+        <Route path='/game' component={Game} />
         <Route>404, lol</Route>
       </Switch>
     </Provider>

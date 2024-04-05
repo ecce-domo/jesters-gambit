@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setPlayerNames } from './redux/playerSlice';
+import { setNumberOfPlayers } from './redux/numberOfPlayersSlice';
 import { useLocation } from 'wouter';
 import './App.css';
 
 const App = () => {
-  const [players, setPlayers] = useState(0);
   const [name0, setName0] = useState('Player 0');
   const [name1, setName1] = useState('Player 1');
   const [name2, setName2] = useState('Player 2');
@@ -17,6 +17,7 @@ const App = () => {
   const [location, navigate] = useLocation();
 
   const playersRedux = useSelector(state => state.players);
+  const playerQty = useSelector(state => state.numberOfPlayers);
   const dispatch = useDispatch();
 
   return (
@@ -28,18 +29,18 @@ const App = () => {
           {
             Array.from({length: 4}, (_, i) => (
             <button
-              onClick={() => setPlayers(3+i)}
-              className={players === (3+i) ? 'selected' : ''}
+              onClick={() => dispatch(setNumberOfPlayers(3+i))}
+              className={playerQty === (3+i) ? 'selected' : ''}
               key={i}
             >{3+i}</button>
             ))
           }
         </div>
       </div>
-      {players ? <>
+      {playerQty ? <>
         <div className="card">
           {
-              names.slice(0, players).map((_, i) => (
+              names.slice(0, playerQty).map((_, i) => (
                 <input
                   onChange={e => setNames[i](e.target.value)}
                   value={names[i]}
@@ -50,7 +51,7 @@ const App = () => {
         </div>
         <button
           onClick={() => {
-            dispatch(setPlayerNames(names.slice(0, players)))
+            dispatch(setPlayerNames(names.slice(0, playerQty)))
             navigate('/game');
           }}
         >Start</button>

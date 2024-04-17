@@ -1,14 +1,18 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'wouter';
+import { useLocation } from 'wouter';
 import './App.css';
 import { connect } from 'react-redux';
 import { setPlayerNames } from './actions/players';
 import { setPlayerQty } from './actions/numberOfPlayers';
+import { setInitialDealer } from './actions/initialDealer';
+import { incrementRound } from './actions/round';
+import { setPhaseToTrump } from './actions/phase';
 
-const App = connect(({ players, numberOfPlayers }) => ({ players, playerQty: numberOfPlayers }), ({
-  setPlayerNames,
-  setPlayerQty,
-}))(({players, playerQty, setPlayerNames, setPlayerQty}) => {
+const App = connect(
+  ({ players, numberOfPlayers }) => ({ players, playerQty: numberOfPlayers }),
+  ({ setPlayerNames, setPlayerQty, setInitialDealer, incrementRound, setPhaseToTrump })
+)(
+  ({ players, playerQty, setPlayerNames, setPlayerQty, setInitialDealer, incrementRound, setPhaseToTrump }) => {
     const [name0, setName0] = useState('Player 0');
     const [name1, setName1] = useState('Player 1');
     const [name2, setName2] = useState('Player 2');
@@ -51,6 +55,9 @@ const App = connect(({ players, numberOfPlayers }) => ({ players, playerQty: num
         <button
           onClick={(e) => {
             setPlayerNames(names.slice(0, playerQty));
+            setInitialDealer(Math.floor(playerQty * Math.random()));
+            incrementRound();
+            setPhaseToTrump();
             navigate('/game');
           }}
         >Start</button>

@@ -205,30 +205,3 @@ const Game = connect(
 });
 
 export default Game;
-
-/* TODO
-
- UNIT TEST REDUCERS BEFORE ANYTHING ELSE :P
-
- game logic
-	- commit round
-	- confirm bids before advancing to score phase (hoc toggle)
-	- render previous rounds (include scores)
-	- indicate dealer
-	- calculate score
-	- endgame
-	- reset button?
-	- figure out edge cases (final round - no trump?)
- style
-	- grey out irrelevant phases
-	- make it look nice
-	- cull CSS and move everything to one file
- technical details
-	- unit test
-	- hoc reducers
-	- reset store on app load
-	- middleware for persistence
-	- ui testing
-	- delete setRound (probably)
-	- i18n
-*/

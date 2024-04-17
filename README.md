@@ -1,8 +1,33 @@
-# React + Vite
+# Wizard scorecard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is my attempt at creating a scorecard for the card game [Wizard]().
 
-Currently, two official plugins are available:
+Currently, it uses React and Redux and builds with Vite.
+This project was borne out of a slight exasperation with the scorecards that come with the game, but mostly a desire for a useful side-project. When I started, I realized how far Redux (specifically, RTK) had come since I last started a project with it. I wasn't sure whether I'd like RTK, so I created an `rtk` branch so that I could move forward with development using the legacy Redux I'm familiar with (in the `main` branch) and doing the same work with RTK in the `rtk` branch (I occasionally merge `main` -> `rtk` for features and rewrite legacy Redux as RTK).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+As of this README edit, this project is very incomplete.
+## TODO:
+- UNIT TEST REDUCERS BEFORE ANYTHING ELSE :P
+### game logic
+- commit round data ("Are you sure?")
+- confirm bids before advancing to score phase (hoc toggle - are you sure?)
+- render previous rounds (include scores)
+- indicate dealer
+- calculate score
+- endgame
+- reset button?
+- figure out edge cases (final round - no trump?)
+### style
+- find better filler for irrelevant phases
+- make it look nice
+- cull CSS and move everything to one file
+### technical details
+- unit test
+- hoc reducers
+- reset store on app load
+- middleware for persistence
+- ui testing
+- delete setRound (probably)
+- i18n (move all text into strings file)
+- github static site
+- more scaffolding steps?

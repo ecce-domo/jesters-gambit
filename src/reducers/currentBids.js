@@ -1,10 +1,12 @@
+const defaultState = [0, 0, 0, 0, 0, 0];
+
 const currentBids = (
-    state = [0, 0, 0, 0, 0, 0],
+    state = defaultState,
     { type, data }
 ) => {
     switch(type) {
         case 'SET_NUMBER_OF_PLAYERS':
-            return state.slice(0, data);
+            return defaultState.slice(0, data);
         case 'INCREMENT_BID_AT_INDEX':
             return state.map((bid, i) => i === data.index ? Math.min(bid + 1, data.cap) : bid);
         case 'DECREMENT_BID_AT_INDEX':

@@ -1,10 +1,12 @@
+const defaultState = [0, 0, 0, 0, 0, 0];
+
 const currentTricks = (
-    state = [0, 0, 0, 0, 0, 0],
+    state = defaultState,
     { type, data }
 ) => {
     switch(type) {
         case 'SET_NUMBER_OF_PLAYERS':
-            return state.slice(0, data);
+            return defaultState.slice(0, data);
         case 'INCREMENT_TRICK_AT_INDEX':
             return state.map(
                 (trick, index, tricks) =>

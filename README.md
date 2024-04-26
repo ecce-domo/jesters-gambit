@@ -7,9 +7,8 @@ This project was borne out of a slight exasperation with the scorecards that com
 
 As of this README edit, this project is very incomplete.
 ## TODO:
-- UNIT TEST REDUCERS BEFORE ANYTHING ELSE :P
 ### game logic
-- commit round data ("Are you sure?")
+- confirm committing round data ("Are you sure?")
 - confirm bids before advancing to score phase (hoc toggle - are you sure?)
 - render previous rounds (include scores)
 - indicate dealer
@@ -21,9 +20,8 @@ As of this README edit, this project is very incomplete.
 - find better filler for irrelevant phases
 - make it look nice
 - cull CSS and move everything to one file
+- (maybe) obscure details of previous rounds until they get focus?
 ### technical details
-- unit test
-- hoc reducers
 - reset store on app load
 - middleware for persistence
 - ui testing

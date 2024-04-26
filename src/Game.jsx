@@ -5,8 +5,9 @@ import { incrementRound, setRound } from './actions/currentRound';
 import { setTrump } from './actions/trump';
 import { setPhaseToBid, setPhaseToScore, setPhaseToTrump } from './actions/phase';
 import { incrementTrickAtIndex, decrementTrickAtIndex } from './actions/tricks';
-// scaffold
+import { commitRound } from './actions/rounds';
 import { setPlayerQty } from './actions/numberOfPlayers';
+// scaffold
 import { setPlayerNames } from './actions/players';
 import { setInitialDealer } from './actions/initialDealer';
 
@@ -36,10 +37,10 @@ const Game = connect(
 	}), ({
 		// just for scaffold
 		setPlayerNames,
-		setPlayerQty,
 		setInitialDealer,
 		setRound,
 		// end scaffold
+		setPlayerQty,
 		incrementBidAtIndex,
 		decrementBidAtIndex,
 		incrementRound,
@@ -49,6 +50,7 @@ const Game = connect(
 		setPhaseToTrump,
 		incrementTrickAtIndex,
 		decrementTrickAtIndex,
+		commitRound,
 	})
 )(({
 	currentBids,
@@ -69,12 +71,13 @@ const Game = connect(
 	setPhaseToTrump,
 	// just for scaffold
 	setPlayerNames,
-	setPlayerQty,
 	setInitialDealer,
 	setRound,
 	// end scaffold
+	setPlayerQty,
 	incrementTrickAtIndex,
 	decrementTrickAtIndex,
+	commitRound,
 }) => {
 	document.documentElement.style.setProperty(
 		'--cell-width',
@@ -87,12 +90,29 @@ const Game = connect(
 		setInitialDealer(Math.floor(6 * Math.random()));
 		setRound(1);
 		setPhaseToTrump();
-		setTrump(suits[Math.floor(4*Math.random())]);
+		setTrump(suits[Math.floor(4 * Math.random())]);
 		setPhaseToBid();
 		incrementBidAtIndex(0, 1);
 		setPhaseToScore();
 		incrementTrickAtIndex(1, 1);
 	};
+
+	const endRound = () => {
+		// make sure the game isn't over
+		if (currentRound === 60 / numberOfPlayers) {
+			// TODO: handle game end
+			return;
+		}
+		// commit round data
+		// increment round
+		// reset phase and trump
+		// reset bids and tricks
+		commitRound({ bids: currentBids, tricks: currentTricks, trump: currentTrump });
+		incrementRound();
+		setPhaseToTrump();
+		setTrump('');
+		setPlayerQty(numberOfPlayers);
+	}
 
 	return (
 		<>
@@ -119,7 +139,7 @@ const Game = connect(
 										<div key={index}>{bid} // {round.tricks[index]}</div>
 									))
 								}
-								<div>{round.trump}</div>
+								<div>{mapSuitToSymbol(round.trump)}</div>
 							</div>
 						))
 					}
@@ -144,6 +164,7 @@ const Game = connect(
 										Set scored tricks
 										<button
 											disabled={currentTricks.reduce((a, b) => a+b) !== currentRound}
+											onClick={endRound}
 										>Done</button>
 									</>
 								),

@@ -1,4 +1,4 @@
-export const setPlayerNames = names => ({
+export const setPlayerNames = data => ({
     type: 'SET_PLAYER_NAMES',
-    names
+    data
 });

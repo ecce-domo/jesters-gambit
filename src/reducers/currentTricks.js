@@ -1,4 +1,4 @@
-const defaultState = [0, 0, 0, 0, 0, 0];
+export const defaultState = [0, 0, 0, 0, 0, 0];
 
 const currentTricks = (
     state = defaultState,

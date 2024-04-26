@@ -4,7 +4,7 @@ import currentBids from './currentBids';
 import currentRound from './currentRound';
 import currentTricks from './currentTricks';
 import hocReplaceReducer from './hocReplace';
-import scores from './scores';
+import rounds from './rounds';
 
 export default combineReducers({
     numberOfPlayers: hocReplaceReducer('NUMBER_OF_PLAYERS', {
@@ -26,5 +26,5 @@ export default combineReducers({
     }),
     currentBids,
     currentTricks,
-    scores,
+    rounds,
 });

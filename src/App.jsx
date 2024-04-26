@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { setPlayerNames } from './actions/players';
 import { setPlayerQty } from './actions/numberOfPlayers';
 import { setInitialDealer } from './actions/initialDealer';
-import { incrementRound } from './actions/round';
+import { incrementRound } from './actions/currentRound';
 import { setPhaseToTrump } from './actions/phase';
 
 const App = connect(

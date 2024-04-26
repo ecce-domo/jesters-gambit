@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { incrementBidAtIndex, decrementBidAtIndex } from './actions/bids';
-import { incrementRound, setRound } from './actions/round';
+import { incrementRound, setRound } from './actions/currentRound';
 import { setTrump } from './actions/trump';
 import { setPhaseToBid, setPhaseToScore, setPhaseToTrump } from './actions/phase';
 import { incrementTrickAtIndex, decrementTrickAtIndex } from './actions/tricks';
@@ -21,7 +21,7 @@ const Game = connect(
 		initialDealer,
 		numberOfPlayers,
 		players,
-		scores,
+		rounds,
 		currentTricks,
 	}) => ({
 		currentBids,
@@ -31,7 +31,7 @@ const Game = connect(
 		initialDealer,
 		numberOfPlayers,
 		players,
-		scores,
+		rounds,
 		currentTricks,
 	}), ({
 		// just for scaffold
@@ -58,7 +58,7 @@ const Game = connect(
 	initialDealer,
 	numberOfPlayers,
 	players,
-	scores,
+	rounds,
 	currentTricks,
 	incrementBidAtIndex,
 	decrementBidAtIndex,
@@ -111,7 +111,7 @@ const Game = connect(
 					</div>
 					{/* previous rounds */}
 					{
-						scores.map((round, index) => (
+						rounds.map((round, index) => (
 							<div className='table-row' key={index}>
 								<div>{index+1}</div>
 								{

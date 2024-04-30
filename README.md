@@ -11,6 +11,7 @@ As of this README edit, this project is very incomplete.
 + render previous rounds (include scores)
 + indicate dealer
 + calculate score
+- show/hide past rounds
 - endgame
 - figure out edge cases (final round - no trump?)
 - confirm committing round data ("Are you sure?")

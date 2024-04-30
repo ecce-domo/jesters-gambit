@@ -155,10 +155,14 @@ const Game = connect(
 				<div className='table'>
 					{/* header row */}
 					<div className='table-row'>
-						<div>Round</div>
+						<div>{currentRound < 2 ? '' : 'Round'}</div>
 						{
 							players.map((player, index) => (
-								<div key={index}>{(index === currentDealer ? `🃏 ${player} 🃏` : player)}</div>
+								<div key={index}>
+									<span className='dealer-icon'>{(index === currentDealer ? `🃏` : ' ')}</span>
+									<br />
+									<span>{player.toUpperCase()}</span>
+								</div>
 							))
 						}
 						<div>Trump</div>
@@ -220,9 +224,9 @@ const Game = connect(
 							[currentPhase]: () => currentBids.map((_, index) => (<div key={index}>⏳</div>)),
 							[BID_PHASE]: () => currentBids.map((bid, index) => (
 								<div className='current-cell' key={index}>
-									<span className='nudge pointer' onClick={() => decrementBidAtIndex(index)}>➖</span>
-									<span>{bid}</span>
-									<span className='nudge pointer' onClick={() => incrementBidAtIndex(index, currentRound)}>➕</span>
+									<span className='nudge minus' onClick={() => decrementBidAtIndex(index)}>➖</span>
+									<span className='nudge-number'>{bid}</span>
+									<span className='nudge plus' onClick={() => incrementBidAtIndex(index, currentRound)}>➕</span>
 								</div>
 							)),
 							[SCORE_PHASE]: () => currentTricks.map((trick, index) => (
@@ -231,9 +235,9 @@ const Game = connect(
 										Bid: {currentBids[index]}
 									</div>
 									<div>
-										<span className='nudge pointer' onClick={() => decrementTrickAtIndex(index)}>➖</span>
-										<span>{trick}</span>
-										<span className='nudge pointer' onClick={() => incrementTrickAtIndex(index, currentRound)}>➕</span>
+										<span className='nudge minus' onClick={() => decrementTrickAtIndex(index)}>➖</span>
+										<span className='nudge-number'>{trick}</span>
+										<span className='nudge plus' onClick={() => incrementTrickAtIndex(index, currentRound)}>➕</span>
 									</div>
 								</div>
 							)),

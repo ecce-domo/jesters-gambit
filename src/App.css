@@ -58,12 +58,16 @@
 }
 .table-row {
   display: flex;
+  align-items: flex-end;
   border-bottom: solid 2px #ccc;
 }
 .table-row > div {
   width: var(--cell-width);
 }
 
+.dealer-icon {
+  font-size: 25px;
+}
 .pointer {
   cursor: pointer;
 }
@@ -72,11 +76,28 @@
   top: 5px;
   right: 5px;
 }
+
 .nudge {
-  background-color: white;
-  margin: 0 5px;
-  border-radius: 10px;
+  border: solid 1px gray;
+  background-color: lightgray;
+  margin: 0;
+  padding: 0 2px;
+  cursor: pointer;
 }
+.nudge-number {
+  border-top: solid 1px gray;
+  border-bottom: solid 1px gray;
+  padding: 0 10px;
+}
+.minus {
+  border-bottom-left-radius: 50%;
+  border-top-left-radius: 50%;
+}
+.plus {
+  border-bottom-right-radius: 50%;
+  border-top-right-radius: 50%;
+}
+
 .trump {
   font-size: 22px;
 }

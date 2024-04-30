@@ -124,10 +124,11 @@ const Game = connect(
 		setTrump('');
 	}
 
-	const prevRoundRenders = rounds.map(({ bids, tricks, trump }) => ({
+	const prevRoundRenders = rounds.map(({ bids, tricks, trump }, roundIndex) => ({
 		bids,
 		tricks,
 		trump,
+		dealer: (initialDealer + roundIndex) % numberOfPlayers,
 		roundScores: bids.map(
 			(bid, index) =>
 				bid === tricks[index]
@@ -145,6 +146,7 @@ const Game = connect(
 					[0, 0, 0, 0, 0, 0].slice(0, numberOfPlayers)
 				)
 	);
+	const currentDealer = (initialDealer + currentRound - 1) % numberOfPlayers;
 
 	return (
 		<>
@@ -156,14 +158,14 @@ const Game = connect(
 						<div>Round</div>
 						{
 							players.map((player, index) => (
-								<div key={index}>{player}</div>
+								<div key={index}>{(index === currentDealer ? `🃏 ${player} 🃏` : player)}</div>
 							))
 						}
 						<div>Trump</div>
 					</div>
 					{/* previous rounds */}
 					{
-						prevRoundRenders.map(({bids, tricks, roundScores, trump}, roundIndex) => (
+						prevRoundRenders.map(({bids, tricks, roundScores, trump, dealer}, roundIndex) => (
 							<div className='table-row' key={roundIndex}>
 								<div>{roundIndex+1}</div>
 								{
@@ -174,7 +176,11 @@ const Game = connect(
 												<br />
 												<span>{tricks[bidIndex]}</span>
 											</div>
-											<div>{roundScores[bidIndex]}</div>
+											<div>
+												<span>{dealer === bidIndex ? '🃏' : ' '}</span>
+												<br />
+												<span>{roundScores[bidIndex]}</span>
+											</div>
 										</div>
 									))
 								}

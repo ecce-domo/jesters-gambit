@@ -9,7 +9,7 @@ As of this README edit, this project is very incomplete.
 ## TODO:
 ### game logic
 + render previous rounds (include scores)
-- indicate dealer
++ indicate dealer
 + calculate score
 - endgame
 - figure out edge cases (final round - no trump?)

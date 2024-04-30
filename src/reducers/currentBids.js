@@ -11,6 +11,8 @@ const currentBids = (
             return state.map((bid, i) => i === data.index ? Math.min(bid + 1, data.cap) : bid);
         case 'DECREMENT_BID_AT_INDEX':
             return state.map((bid, i) => i === data.index ? Math.max(bid - 1, 0) : bid);
+        case 'INCREMENT_ROUND':
+            return state.map(() => 0);
         default:
             return state;
     }

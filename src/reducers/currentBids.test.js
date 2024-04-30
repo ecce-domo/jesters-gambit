@@ -5,6 +5,10 @@ test('adjust bids to more players', t => t.deepEqual(
     currentBids([0, 0, 0], { type: 'SET_NUMBER_OF_PLAYERS', data: 6 }),
     [0, 0, 0, 0, 0, 0]
 ))
+test('incrementing round resets bids', t => t.deepEqual(
+    currentBids([0, 0, 0, 1], { type: 'INCREMENT_ROUND' }),
+    [0, 0, 0, 0]
+))
 test('increment bid', t => t.deepEqual(
     currentBids([0, 0, 0, 0], { type: 'INCREMENT_BID_AT_INDEX', data: { index: 1, cap: 1 }}),
     [0, 1, 0, 0]

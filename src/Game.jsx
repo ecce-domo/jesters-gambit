@@ -97,6 +97,17 @@ const Game = connect(
 		incrementTrickAtIndex(1, 1);
 	};
 
+	const scaffold2 = () => {
+		endRound();
+		setTrump(suits[Math.floor(4 * Math.random())]);
+		setPhaseToBid();
+		incrementBidAtIndex(1, 2);
+		incrementBidAtIndex(2, 2);
+		setPhaseToScore();
+		incrementTrickAtIndex(1, 2);
+		incrementTrickAtIndex(1, 2);
+	};
+
 	const endRound = () => {
 		// make sure the game isn't over
 		if (currentRound === 60 / numberOfPlayers) {
@@ -111,8 +122,29 @@ const Game = connect(
 		incrementRound();
 		setPhaseToTrump();
 		setTrump('');
-		setPlayerQty(numberOfPlayers);
 	}
+
+	const prevRoundRenders = rounds.map(({ bids, tricks, trump }) => ({
+		bids,
+		tricks,
+		trump,
+		roundScores: bids.map(
+			(bid, index) =>
+				bid === tricks[index]
+					? 20 + bid * 10
+					: Math.abs(bid - tricks[index]) * -10
+		),
+	}));
+	const totalScores = prevRoundRenders.map(
+		(_, roundIndex, allRounds) =>
+			allRounds
+				.slice(0, roundIndex + 1)
+				.map(({ roundScores }) => roundScores)
+				.reduce(
+					(a,b) => a.map((score, n) => score + b[n]),
+					[0, 0, 0, 0, 0, 0].slice(0, numberOfPlayers)
+				)
+	);
 
 	return (
 		<>
@@ -131,15 +163,22 @@ const Game = connect(
 					</div>
 					{/* previous rounds */}
 					{
-						rounds.map((round, index) => (
-							<div className='table-row' key={index}>
-								<div>{index+1}</div>
+						prevRoundRenders.map(({bids, tricks, roundScores, trump}, roundIndex) => (
+							<div className='table-row' key={roundIndex}>
+								<div>{roundIndex+1}</div>
 								{
-									round.bids.map((bid, index) => (
-										<div key={index}>{bid} // {round.tricks[index]}</div>
+									bids.map((bid, bidIndex) => (
+										<div key={bidIndex} className='prev-round'>
+											<div>
+												<span>{bid}</span>
+												<br />
+												<span>{tricks[bidIndex]}</span>
+											</div>
+											<div>{roundScores[bidIndex]}</div>
+										</div>
 									))
 								}
-								<div>{mapSuitToSymbol(round.trump)}</div>
+								<div>{mapSuitToSymbol(trump)}</div>
 							</div>
 						))
 					}
@@ -212,15 +251,20 @@ const Game = connect(
 					<div className='table-row'>
 						<div>Scores</div>
 						{
-							players.map((player, index) => (
-								<div key={index}>0</div>
+							(!totalScores.length ? [0, 0, 0, 0, 0, 0].slice(0, numberOfPlayers || 6) : totalScores[totalScores.length-1]).map((score, index) => (
+								<div key={index}>{score}</div>
 							))
 						}
 						<div></div>
 					</div>
 				</div>
 			</main>
-			{ DEBUG ? (<button className='top-right' onClick={scaffold}>Scaffold</button>) : '' }
+			{ DEBUG ? (
+				<div className='top-right'>
+					<button onClick={scaffold}>Scaffold</button>
+					<button onClick={scaffold2}>Scaffold 2</button>
+				</div>
+			) : '' }
 		</>
 	);
 });

@@ -5,6 +5,10 @@ test('adjust tricks to more players', t => t.deepEqual(
     currentTricks([0, 0, 0], { type: 'SET_NUMBER_OF_PLAYERS', data: 6 }),
     [0, 0, 0, 0, 0, 0]
 ))
+test('incrementing round resets tricks', t => t.deepEqual(
+    currentTricks([0, 0, 0, 1], { type: 'INCREMENT_ROUND' }),
+    [0, 0, 0, 0]
+))
 test('increment trick', t => t.deepEqual(
     currentTricks([0, 0, 0, 0], { type: 'INCREMENT_TRICK_AT_INDEX', data: { index: 1, cap: 1 }}),
     [0, 1, 0, 0]

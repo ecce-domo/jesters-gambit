@@ -1,6 +1,6 @@
 # Wizard scorecard
 
-This is my attempt at creating a scorecard for the card game [Wizard]().
+This is my attempt at creating a scorecard for the card game [Wizard](https://www.usgamesinc.com/Cards_and_Games/wizard-card-games/original-wizard-r-card-game.html).
 
 Currently, it uses React and Redux and builds with Vite.
 This project was borne out of a slight exasperation with the scorecards that come with the game, but mostly a desire for a useful side-project. When I started, I realized how far Redux (specifically, RTK) had come since I last started a project with it. I wasn't sure whether I'd like RTK, so I created an `rtk` branch so that I could move forward with development using the legacy Redux I'm familiar with (in the `main` branch) and doing the same work with RTK in the `rtk` branch (I occasionally merge `main` -> `rtk` for features and rewrite legacy Redux as RTK).
@@ -8,14 +8,15 @@ This project was borne out of a slight exasperation with the scorecards that com
 As of this README edit, this project is very incomplete.
 ## TODO:
 ### game logic
++ render previous rounds (include scores)
+- indicate dealer
++ calculate score
+- endgame
+- figure out edge cases (final round - no trump?)
 - confirm committing round data ("Are you sure?")
 - confirm bids before advancing to score phase (hoc toggle - are you sure?)
-- render previous rounds (include scores)
-- indicate dealer
-- calculate score
-- endgame
 - reset button?
-- figure out edge cases (final round - no trump?)
+- maybe isolate util functions so they can be tested
 ### style
 - find better filler for irrelevant phases
 - make it look nice
